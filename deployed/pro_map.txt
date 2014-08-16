@@ -1,0 +1,269 @@
+ayamadori.piclip.PiClip -> ayamadori.piclip.PiClip:
+    javax.microedition.lcdui.Display display -> c
+    ayamadori.piclip.ui.PiPanel_NewAsha piPanel -> d
+    boolean enableCopy -> a
+    boolean upgraded -> b
+    com.nokia.payment.NPayManager paymentManager -> e
+    java.lang.String[] productIds -> f
+    ayamadori.piclip.util.PurchaseStore storeRepo -> g
+    javax.microedition.lcdui.Alert alert -> h
+    void startApp() -> startApp
+    void pauseApp() -> pauseApp
+    void destroyApp(boolean) -> destroyApp
+    void purchaceUpgrade() -> a
+    void purchaseCompleted(com.nokia.payment.PurchaseData) -> a
+    com.nokia.payment.NPayManager access$0(ayamadori.piclip.PiClip) -> a
+ayamadori.piclip.PiClip$1 -> ayamadori.piclip.a:
+    ayamadori.piclip.PiClip this$0 -> a
+    javax.microedition.lcdui.Command val$cmdInstallEnabler -> b
+    javax.microedition.lcdui.Command val$cmdExit -> c
+    void commandAction(javax.microedition.lcdui.Command,javax.microedition.lcdui.Displayable) -> commandAction
+ayamadori.piclip.dic.CombinedDictionary -> a:
+    ayamadori.piclip.dic.Words wordsDic -> a
+    ayamadori.piclip.dic.Phrases phrasesDic -> b
+    java.lang.String[] wcand -> c
+    ayamadori.piclip.ui.PiPanel parent -> d
+    void search(java.lang.String[],java.lang.String,java.lang.String) -> a
+    void learning(int) -> a
+    void resetHistory() -> a
+    int searchMode() -> b
+    void setSearchMode(int) -> b
+    int getCandsSize() -> c
+ayamadori.piclip.dic.Dictionary -> b:
+    int[] dicLine -> a
+    int candLength -> b
+    int[] candDicLine -> c
+    java.lang.StringBuffer dicData -> d
+    int searchMode -> e
+    int dicIndex -> f
+    int[] histories -> g
+    java.lang.String name -> h
+    javax.microedition.rms.RecordStore record -> i
+    void loadDic(int) -> a
+    int getCandsSize() -> a
+    char toHiraSei(char) -> a
+    int searchMode() -> b
+    void setSearchMode(int) -> b
+    void learning(int) -> c
+    int indexOf(java.lang.StringBuffer,char,int) -> a
+    void loadHisory() -> d
+    void resetHistory() -> c
+ayamadori.piclip.dic.Phrases -> c:
+    void search$28486b25(java.lang.String[],java.lang.String,java.lang.String) -> a
+ayamadori.piclip.dic.Words -> d:
+    void search$28486b25(java.lang.String[],java.lang.String,int) -> a
+ayamadori.piclip.ui.About -> e:
+    javax.microedition.midlet.MIDlet midlet -> a
+    javax.microedition.lcdui.Command cmdBack -> b
+    javax.microedition.lcdui.Form window -> c
+    javax.microedition.lcdui.Displayable parent -> d
+    void commandAction(javax.microedition.lcdui.Command,javax.microedition.lcdui.Displayable) -> commandAction
+ayamadori.piclip.ui.FlickKeyboard -> f:
+    ayamadori.piclip.ui.PiPanel parent -> a
+    java.lang.String[] KEYS_KANA -> b
+    java.lang.String[] KEYS_ABC -> c
+    java.lang.String[] KEYS_SYMBOL -> d
+    boolean keyboard_visibility -> e
+    int pressed_button -> f
+    com.nokia.mid.ui.gestures.GestureInteractiveZone gizButtonArea -> g
+    int[] buttonArea -> h
+    java.lang.String[] keys -> i
+    javax.microedition.lcdui.Image imgButtonClear -> j
+    javax.microedition.lcdui.Image imgButtonClearPressed -> k
+    javax.microedition.lcdui.Image imgButtonShift -> l
+    javax.microedition.lcdui.Image imgButtonShiftPressed -> m
+    javax.microedition.lcdui.Image imgButtonEnter -> n
+    javax.microedition.lcdui.Image imgButtonEnterPressed -> o
+    ayamadori.piclip.ui.FlickKeyboard getFlickKeyboardControl(ayamadori.piclip.ui.PiPanel) -> a
+    void drawFlickKeyboard(javax.microedition.lcdui.Graphics) -> a
+    void setButtonArea() -> e
+    int buttonNumToKeycode(int) -> a
+    void gestureAction$9ccf721(com.nokia.mid.ui.gestures.GestureInteractiveZone,com.nokia.mid.ui.gestures.GestureEvent) -> a
+    void launch() -> a
+    void dismiss() -> b
+    boolean isVisible() -> c
+    int getHeight() -> d
+    int getYPosition() -> f
+ayamadori.piclip.ui.HeaderBar -> g:
+    int width -> a
+    void paint(javax.microedition.lcdui.Graphics) -> a
+    void drawChar(javax.microedition.lcdui.Graphics,javax.microedition.lcdui.Font,char,int,int,int) -> a
+    void drawString(javax.microedition.lcdui.Graphics,javax.microedition.lcdui.Font,java.lang.String,int,int,int) -> a
+    int charWidth(javax.microedition.lcdui.Font,char) -> a
+    java.lang.String URLencode(java.lang.String) -> a
+    int codePointlength(java.lang.StringBuffer,int) -> a
+    java.lang.String getCodePoint(java.lang.StringBuffer,int) -> b
+ayamadori.piclip.ui.PiPanel -> h:
+    javax.microedition.midlet.MIDlet midlet -> a
+    javax.microedition.lcdui.Font font -> b
+    int iScrWidth -> c
+    int iScrHeight -> d
+    int iFirstLine -> e
+    int iMaxLine -> f
+    java.lang.StringBuffer sbPre -> g
+    java.lang.StringBuffer sbCur -> h
+    int iPreIdx -> i
+    int iCurIdx -> j
+    ayamadori.piclip.dic.CombinedDictionary dictionary -> k
+    java.lang.String prefix -> l
+    java.lang.String[] cand -> m
+    ayamadori.piclip.ui.FlickKeyboard keyboard -> n
+    int iBoader -> o
+    com.nokia.mid.ui.gestures.GestureInteractiveZone gizTBArea -> p
+    com.nokia.mid.ui.gestures.GestureInteractiveZone gizCandsArea -> q
+    int[] iCandArea -> r
+    int iDragRepeat -> s
+    int mode -> t
+    void drawText(javax.microedition.lcdui.Graphics,int) -> a
+    void drawCands(javax.microedition.lcdui.Graphics) -> a
+    void drawKeyboard(javax.microedition.lcdui.Graphics) -> b
+    void keyPressed(int) -> keyPressed
+    void changeToNormalCommand() -> a
+    void setCommands() -> b
+    void onChangeCharType() -> c
+    void onFullMatch() -> d
+    void onNormal() -> e
+    void onClearDictionary() -> f
+    void onNewText() -> g
+    void onBack() -> h
+    void onAbout() -> i
+    void editMode() -> j
+    void viewMode() -> k
+    void setKeyboardVisibility(boolean) -> a
+    void setEditMode() -> l
+    void setViewMode() -> m
+    void pressFire(java.lang.String,int) -> a
+    void gestureAction(java.lang.Object,com.nokia.mid.ui.gestures.GestureInteractiveZone,com.nokia.mid.ui.gestures.GestureEvent) -> gestureAction
+    java.lang.String getString() -> n
+    int getMode() -> o
+ayamadori.piclip.ui.PiPanel_NewAsha -> i:
+    com.nokia.mid.ui.CategoryBar cbAction -> a
+    javax.microedition.lcdui.Command cmdChgChar -> b
+    javax.microedition.lcdui.Command cmdNormal -> c
+    javax.microedition.lcdui.Command cmdFullMatch -> d
+    javax.microedition.lcdui.Command cmdBack -> e
+    javax.microedition.lcdui.Command cmdClearDic -> f
+    javax.microedition.lcdui.Command cmdAbout -> g
+    ayamadori.piclip.PiClip midlet -> h
+    ayamadori.piclip.ui.HeaderBar header -> i
+    javax.microedition.lcdui.Command cmdUpgrade -> j
+    void setCommands() -> b
+    void editMode() -> j
+    void viewMode() -> k
+    void paint(javax.microedition.lcdui.Graphics) -> paint
+    void commandAction(javax.microedition.lcdui.Command,javax.microedition.lcdui.Displayable) -> commandAction
+    void changeToNormalCommand() -> a
+    void notifyElementSelected(com.nokia.mid.ui.CategoryBar,int) -> notifyElementSelected
+    void showNotify() -> showNotify
+ayamadori.piclip.ui.ShareMenu -> j:
+    javax.microedition.midlet.MIDlet midlet -> a
+    javax.microedition.lcdui.Display display -> b
+    javax.microedition.lcdui.Displayable backScreen -> c
+    java.lang.String text -> d
+    javax.microedition.lcdui.List shareList -> e
+    javax.microedition.lcdui.Command back -> f
+    javax.microedition.lcdui.Alert errorMessageAlert -> g
+    void openBrowserMenu(javax.microedition.lcdui.Displayable) -> a
+    void commandAction(javax.microedition.lcdui.Command,javax.microedition.lcdui.Displayable) -> commandAction
+    void launch(java.lang.String) -> a
+    void share() -> a
+ayamadori.piclip.util.PurchaseStore -> k:
+    javax.microedition.rms.RecordStore paymentStore -> a
+    java.lang.String repositoryName -> b
+    void store(java.lang.String) -> a
+    boolean isPurchased(java.lang.String) -> b
+    boolean isRecordExist(java.lang.String) -> c
+com.nokia.payment.NPayException -> l:
+com.nokia.payment.NPayListener -> m:
+    void purchaseCompleted(com.nokia.payment.PurchaseData) -> a
+com.nokia.payment.NPayManager -> n:
+    com.nokia.payment.priv.a a -> a
+    void getProductData(java.lang.String[]) -> a
+    boolean isNPayAvailable() -> a
+    void purchaseProduct(java.lang.String) -> a
+    void setNPayListener(com.nokia.payment.NPayListener) -> a
+    void launchNPaySetup() -> b
+com.nokia.payment.ProductData -> o:
+com.nokia.payment.PurchaseData -> p:
+    int c -> a
+    int getStatus() -> a
+com.nokia.payment.priv.NPayPerftestListener -> q:
+com.nokia.payment.priv.a -> r:
+    com.nokia.payment.NPayListener a -> a
+    com.nokia.payment.priv.NPayPerftestListener b -> b
+    javax.microedition.content.Registry c -> c
+    javax.microedition.content.ContentHandlerServer d -> d
+    javax.microedition.midlet.MIDlet e -> e
+    boolean f -> f
+    java.util.Hashtable g -> g
+    boolean h -> h
+    boolean i -> i
+    boolean j -> j
+    boolean k -> k
+    boolean l -> l
+    java.lang.String[] m -> m
+    java.lang.Object n -> n
+    void a(com.nokia.payment.NPayListener) -> a
+    void a(java.lang.String) -> a
+    void a(java.lang.String[]) -> a
+    java.lang.String b(java.lang.String) -> b
+    boolean a() -> a
+    void b() -> b
+    void a(javax.microedition.content.Invocation) -> a
+    void invocationResponseNotify(javax.microedition.content.Registry) -> invocationResponseNotify
+    void c(java.lang.String) -> c
+    void invocationRequestNotify(javax.microedition.content.ContentHandlerServer) -> invocationRequestNotify
+    boolean e() -> e
+    void c() -> c
+    java.lang.String[] c(java.lang.String[]) -> b
+    java.lang.String[] d() -> d
+    java.lang.String a(com.nokia.payment.priv.a,java.lang.String) -> a
+    java.lang.String b(com.nokia.payment.priv.a,java.lang.String) -> b
+    java.lang.String a(com.nokia.payment.priv.a) -> a
+    boolean a(com.nokia.payment.priv.a,boolean) -> a
+    com.nokia.payment.NPayListener b(com.nokia.payment.priv.a) -> b
+    void c(com.nokia.payment.priv.a) -> c
+    javax.microedition.midlet.MIDlet d(com.nokia.payment.priv.a) -> d
+com.nokia.payment.priv.b -> s:
+    java.lang.String[] a -> a
+    com.nokia.payment.priv.a b -> b
+    void run() -> run
+com.nokia.payment.priv.c -> t:
+    com.nokia.payment.priv.a a -> a
+    void run() -> run
+com.nokia.payment.priv.d -> u:
+    java.util.Vector a -> a
+    boolean b -> b
+    java.lang.String a() -> a
+    void a(java.lang.String) -> a
+    void a(java.lang.String,com.nokia.payment.priv.f) -> a
+    java.lang.String b() -> b
+    java.util.Hashtable c() -> c
+    java.lang.String[] a(java.lang.String,java.lang.String) -> a
+    java.util.Hashtable b(java.lang.String) -> b
+    java.util.Hashtable e() -> e
+    java.util.Hashtable aa() -> f
+    java.util.Hashtable ab() -> g
+    java.util.Hashtable ac() -> h
+    java.util.Hashtable ad() -> i
+    java.util.Hashtable ae() -> j
+    java.util.Hashtable af() -> k
+    java.util.Hashtable ag() -> l
+    java.util.Hashtable ah() -> m
+    java.util.Hashtable ai() -> n
+    boolean d() -> d
+    void a(boolean) -> a
+com.nokia.payment.priv.e -> v:
+    java.lang.String[] a -> a
+    com.nokia.payment.priv.f b -> b
+    void run() -> run
+com.nokia.payment.priv.f -> w:
+    void c() -> c
+com.nokia.payment.priv.g -> x:
+    java.lang.String a -> a
+    javax.microedition.rms.RecordStore b -> b
+    void a() -> a
+    void a(java.lang.String,java.lang.String) -> a
+    boolean matches(byte[]) -> matches
+    java.lang.String a(java.lang.String) -> a
+    java.lang.String b(java.lang.String) -> b
