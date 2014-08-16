@@ -1,7 +1,7 @@
 PiClip
 ========
 
-A simple Japanese input helper.
+A simple Japanese input helper for Nokia Asha Platform.
 http://store.ovi.com/content/569913
 
 1. Feature
