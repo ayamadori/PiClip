@@ -1,11 +1,11 @@
 PiClip
-========
+======
 
 A simple Japanese input helper for Nokia Asha Platform.
 http://store.ovi.com/content/569913
 
 1. Feature
------------
+----------
 * Flick keyboard
 * Word & Phrase prediction
 * Emoji (EXPERIMENTAL)
@@ -13,27 +13,27 @@ http://store.ovi.com/content/569913
 * [Share] menu
 * Clipboard (EXPERIMENTAL)
 
-2. Using Nokia APIs
--------------
+2. Use of Nokia APIs
+--------------------
 * Share API
 * Nokia Gesture API
 * Nokia UI API
 * Nokia In-App payment plug-in
 
-3. Using external library
+3. Use of external library
 --------------------------
 * econodic http://www8.atpages.jp/pulpwood/isweb/omake/econodic.html
 * Unicode Emoji Dictionary http://sourceforge.jp/projects/moji/
 
 4. Test
------
+-------
 Tested on Nokia Asha SDK 1.1 & 1.2(beta).
 
 5. License
------------
-GPL v2
+----------
+GNU GENERAL PUBLIC LICENSE Version 2
 http://www.gnu.org/licenses/gpl-2.0.html
 
 6. Version history
-----------------
+------------------
 * 1.0 Initial release.
