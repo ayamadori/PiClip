@@ -1,9 +1,0 @@
-MIDlet-1: PiClip,/Pencil.png,ayamadori.piclip.PiClip
-MIDlet-Jar-Size: 402819
-MIDlet-Jar-URL: PiClip.jar
-MIDlet-Name: PiClip
-MIDlet-Vendor: ayamadori
-MIDlet-Version: 1.0.0
-MicroEdition-Configuration: CLDC-1.1
-MicroEdition-Profile: MIDP-2.1
-Nokia-IAP-Pricepoint-1288794: 1
