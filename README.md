@@ -31,8 +31,8 @@ Tested on Nokia Asha SDK 1.1 & 1.2(beta).
 
 License
 ----------
-GNU GENERAL PUBLIC LICENSE Version 2
-http://www.gnu.org/licenses/gpl-2.0.html
+GNU GENERAL PUBLIC LICENSE Version 3
+http://www.gnu.org/licenses/gpl-3.0.html
 
 Version history
 ------------------
