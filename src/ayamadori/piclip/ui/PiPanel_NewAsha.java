@@ -65,11 +65,11 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 		}
 		String[] labels = { "Share", "Browser", "Delete" };
 		cbAction = new CategoryBar(icons, null, labels, CategoryBar.ELEMENT_MODE_RELEASE_SELECTED);
-		cmdChgChar = new Command("Change Character Type", Command.ITEM, 1);
+		cmdChgChar = new Command("Change character type", Command.ITEM, 1);
 		cmdNormal = new Command("Normal predict", Command.ITEM, 2);
 		cmdFullMatch = new Command("Full match", Command.ITEM, 2);
 		cmdBack = new Command("Back", Command.BACK, 9);
-		cmdClearDic = new Command("Clear Dictionary (App exit)", Command.ITEM, 3);
+		cmdClearDic = new Command("Clear dictionary (App exit)", Command.ITEM, 3);
 		cmdAbout = new Command("About", Command.ITEM, 5);
 		cmdUpgrade = new Command("Upgrade", Command.ITEM, 4);
 		
@@ -147,11 +147,11 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 			onChangeCharType();
 		} else if (c == cmdFullMatch) {
 			onFullMatch();
-			changeToNormalCommand();
+			removeCommand(cmdFullMatch);
+			addCommand(cmdNormal);
 		} else if (c == cmdNormal) {
-			onNormal();
-			removeCommand(cmdNormal);
-			addCommand(cmdFullMatch);
+			onNormal();			
+			changeToFullMatchCommand();
 		} else if (c == cmdClearDic) {
 			onClearDictionary();
 		} else if (c == cmdBack) {
@@ -167,9 +167,9 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 		repaint();
 	}
 	
-	protected void changeToNormalCommand() {
-		removeCommand(cmdFullMatch);
-		addCommand(cmdNormal);
+	protected void changeToFullMatchCommand() {
+		removeCommand(cmdNormal);
+		addCommand(cmdFullMatch);
 	}
 	
 	public void removeUpgradeCommand() {

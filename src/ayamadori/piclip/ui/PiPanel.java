@@ -361,7 +361,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 			// 完全一致モードなら通常予測に戻す
 			if (dictionary.searchMode() == Dictionary.PREDICT_FULL_MATCH) {
 				dictionary.setSearchMode(Dictionary.PREDICT_NORMAL);
-				changeToNormalCommand();
+				changeToFullMatchCommand();
 			}
 			dictionary.search(cand, prefix, sbCur.toString());
 //			dictionary.search(prefix, sbCur.toString());
@@ -397,7 +397,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		repaint();
 	}
 	
-	protected abstract void changeToNormalCommand();
+	protected abstract void changeToFullMatchCommand();
 	// ------------------------------------------------------------------------
 	
 	// かな<>カナ、大文字<>小文字相互変換
@@ -431,8 +431,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 			for (int i = sbCur.length() - 1; i >= 0; i--) {
 				sbCur.setCharAt(i, convertChar(sbCur.charAt(i)));
 			}
-			dictionary.search(cand, prefix, sbCur.toString());
-//			dictionary.search(prefix, sbCur.toString());
+			pressFire(sbCur.toString(), -1);
 			repaint();
 		}
 	}
@@ -468,7 +467,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		// 完全一致モードなら通常予測に戻す
 		if (dictionary.searchMode() == Dictionary.PREDICT_FULL_MATCH) {
 			dictionary.setSearchMode(Dictionary.PREDICT_NORMAL);
-			changeToNormalCommand();
+			changeToFullMatchCommand();
 		}
 		dictionary.search(cand, prefix, sbCur.toString());
 //		dictionary.search(prefix, sbCur.toString());
@@ -510,6 +509,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 			else sbPre.deleteCharAt(iPreIdx);
 //			sbPre.deleteCharAt(iPreIdx);
 			prefix = null;
+			if(sbPre.length() < 1) iFirstLine = 0;
 		}
 	}
 	
@@ -528,7 +528,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		iBoader = getHeight() - keyboard.getHeight() - (FONT_HEIGHT + MARGIN * 2) * 2;
 		iMaxLine = (iBoader - (FONT_HEIGHT + FONT_HEIGHT * 2)) / (FONT_HEIGHT + MARGIN) - 1;// 何行"目"まで表示できるか？
 		gizTBArea.setRectangle(0, 0, getWidth(), iBoader);
-		gizCandsArea.setRectangle(0, iBoader, getWidth(), iScrHeight - iBoader);
+		gizCandsArea.setRectangle(0, iBoader, getWidth(), iScrHeight - iBoader - keyboard.getHeight());
 		GestureRegistrationManager.register(this, gizCandsArea);
 	}
 	
@@ -558,7 +558,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		// 完全一致モードなら通常予測に戻す
 		if (dictionary.searchMode() == Dictionary.PREDICT_FULL_MATCH) {
 			dictionary.setSearchMode(Dictionary.PREDICT_NORMAL);
-			changeToNormalCommand();
+			changeToFullMatchCommand();
 		}
 		prefix = temp;
 		dictionary.search(cand, prefix, sbCur.toString());
@@ -737,11 +737,11 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 								&& (y > iCandArea[i * 3 + 1] - 1)
 								&& (y < iCandArea[i * 3 + 1] + (FONT_HEIGHT + MARGIN * 2) - 1)) {
 							pressFire(cand[i], i);
-							repaint();
 							break;
 						}
 					}
 					if (!keyboard.isVisible()) keyboard.launch();
+					gizCandsArea.setRectangle(0, iBoader, getWidth(), iScrHeight - iBoader - keyboard.getHeight());
 					break;
 
 				case GestureInteractiveZone.GESTURE_FLICK:
@@ -749,16 +749,23 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 					float direction = gestureEvent.getFlickDirection();
 					if (direction > Math.PI / 3 && direction < Math.PI * 2 / 3) {
 						// flick DOWN
-						if (gestureEvent.getStartY() < (iScrHeight - keyboard.getHeight()) && keyboard.isVisible())
+						if (gestureEvent.getStartY() < (iScrHeight - keyboard.getHeight()) && keyboard.isVisible()) {						
 						    keyboard.dismiss();
+						    gizCandsArea.setRectangle(0, iBoader, getWidth(), iScrHeight - iBoader);
+						}
 					} else if (direction > Math.PI * (-2) / 3 && direction < Math.PI * (-1) / 3) {
 						// flick UP
-						if (!keyboard.isVisible()) keyboard.launch();
+						if (!keyboard.isVisible()) {
+							keyboard.launch();
+							gizCandsArea.setRectangle(0, iBoader, getWidth(), iScrHeight - iBoader - keyboard.getHeight());
+						}
 					}
 					break;
 			}
 		}
 		keyboard.gestureAction(container, gestureZone, gestureEvent);
+		repaint();
+		System.gc();
 	}
 
 	public String getString() {
@@ -768,17 +775,4 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 	public int getMode() {
 		return mode;
 	}
-	
-//	public void setCandidates(String[] cand) {
-//		this.cand = cand;
-//	}
-	
-//	protected void showNotify() {
-//		dictionary.openDictionary();
-//	}
-//	
-//	protected void hideNotify() {
-//		dictionary.closeDictionary();
-//	}
-
 }

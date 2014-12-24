@@ -12,7 +12,7 @@ public class About implements CommandListener {
 	private final String TEXT =
 			"PiClip\n" +
 			"\n" +
-			"Version 1.0.0\n" +
+			"Version 1.0.5\n" +
 			"\n" +
 			"2014 Copyright (c) ayamadori. All rights reserved.\n" +
 			"<https://sites.google.com/site/ayamadori/>\n" +

@@ -30,7 +30,7 @@ public class FlickKeyboard {
 	private static final int TEXT_COLOR = 0xFFFFFF;
 //	private static final int TEXT_SUB_COLOR = 0x000000;
 	private static final int TEXT_SIZE = 16;
-	private static final int LONG_PRESS_TIME_INTERVAL = 150;
+//	private static final int LONG_PRESS_TIME_INTERVAL = 150;
 	
 	private static final String[] KEYS_KANA = { "わをんー　", "あいうえお", "かきくけこ", "さしすせそ", "たちつてと", "なにぬねの", "はひふへほ", "まみむめも",
 		"や　ゆ　よ", "らりるれろ", "、。？！　", "ABC" };
@@ -57,8 +57,9 @@ public class FlickKeyboard {
 //	private FlickKeyboard(Canvas parent) {
 		this.parent = parent;
 		buttonArea = new int[16 * 2];
-		gizButtonArea = new GestureInteractiveZone(GestureInteractiveZone.GESTURE_TAP|GestureInteractiveZone.GESTURE_FLICK|GestureInteractiveZone.GESTURE_RECOGNITION_START|GestureInteractiveZone.GESTURE_RECOGNITION_END|GestureInteractiveZone.GESTURE_LONG_PRESS_REPEATED);
-
+//		gizButtonArea = new GestureInteractiveZone(GestureInteractiveZone.GESTURE_TAP|GestureInteractiveZone.GESTURE_FLICK|GestureInteractiveZone.GESTURE_RECOGNITION_START|GestureInteractiveZone.GESTURE_RECOGNITION_END|GestureInteractiveZone.GESTURE_LONG_PRESS_REPEATED);
+		gizButtonArea = new GestureInteractiveZone(GestureInteractiveZone.GESTURE_TAP|GestureInteractiveZone.GESTURE_FLICK|GestureInteractiveZone.GESTURE_RECOGNITION_START|GestureInteractiveZone.GESTURE_RECOGNITION_END);
+		
 		keyboard_visibility = false;
 		pressed_button = -1;
 
@@ -73,7 +74,7 @@ public class FlickKeyboard {
 			e.printStackTrace();
 		}
 
-		gizButtonArea.setLongPressTimeInterval(LONG_PRESS_TIME_INTERVAL);
+//		gizButtonArea.setLongPressTimeInterval(LONG_PRESS_TIME_INTERVAL);
 	}
 
 	public static FlickKeyboard getFlickKeyboardControl(PiPanel parent) {
@@ -207,90 +208,85 @@ public class FlickKeyboard {
 		else return -1;
 	}
 
-	public void gestureAction(Object container, GestureInteractiveZone gestureInteractiveZone,
-			GestureEvent gestureEvent) {
-		if (gestureInteractiveZone.equals(gizButtonArea)) {
-			int x = gestureEvent.getStartX();
-			int y = gestureEvent.getStartY();
-			// System.out.println("gizButtonPressed: (" + x + "," + y + ")");
-			for (int i = 0; i < 16; i++) {
-				if (x > buttonArea[i * 2] - 1 && x < buttonArea[i * 2] + BUTTON_WIDTH - 1
-						&& y > buttonArea[i * 2 + 1] - 1 && y < buttonArea[i * 2 + 1] + BUTTON_HEIGHT - 1) {
-					// System.out.println("tapped ButtonArea = " + i);
-					int keycode = buttonNumToKeycode(i);
-					switch (gestureEvent.getType()) {
-						case GestureInteractiveZone.GESTURE_RECOGNITION_START:
-							pressed_button = i;
-							parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
-									BUTTON_WIDTH, BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
-							break;
-						case GestureInteractiveZone.GESTURE_RECOGNITION_END:
-							pressed_button = -1;
-							parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
-									BUTTON_WIDTH, BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
-							break;
-						case GestureInteractiveZone.GESTURE_TAP:
-							if (keycode > -1) {
-								parent.keyPressed(keys[keycode].charAt(0));
-							} else {
-								if (i == 3) {
-									parent.keyPressed(KEY_CLEAR);
-								} else if (i == 7) {
-									if (keys.equals(KEYS_KANA)) keys = KEYS_ABC;
-									else if (keys.equals(KEYS_ABC)) keys = KEYS_SYMBOL;
-									else if (keys.equals(KEYS_SYMBOL)) keys = KEYS_KANA;
-									parent.repaint(getXPosition(), getYPosition(), getWidth(), getHeight());
-									return;
-								} else if (i == 11) {
-									parent.keyPressed(parent.getKeyCode(Canvas.RIGHT));
-								} else if (i == 12) {
-									parent.keyPressed(KEY_SHIFT);
-								} else if (i == 15) {
-									parent.keyPressed(parent.getKeyCode(Canvas.FIRE));
-								}
-								parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
-										BUTTON_WIDTH, BUTTON_HEIGHT);
-							}
-							break;
-						case GestureInteractiveZone.GESTURE_FLICK:
-							if (keycode > -1) {
-								float direction = gestureEvent.getFlickDirection();
-								if (direction > Math.PI / 4 && direction < Math.PI * 3 / 4) {
-									// flick DOWN
-									parent.keyPressed(keys[keycode].charAt(4));
-								} else if (direction > Math.PI * (-3) / 4 && direction < Math.PI * (-1) / 4) {
-									// flick UP
-									parent.keyPressed(keys[keycode].charAt(2));
-								} else if (direction < Math.PI * (-3) / 4 || direction > Math.PI * 3 / 4) {
-									// flick LEFT
-									parent.keyPressed(keys[keycode].charAt(1));
-								} else if (direction > Math.PI * (-1) / 4 && direction < Math.PI / 4) {
-									// flick RIGHT
-									parent.keyPressed(keys[keycode].charAt(3));
-								}
-							}
-							break;
-						case GestureInteractiveZone.GESTURE_LONG_PRESS_REPEATED:
+	public void gestureAction(Object container, GestureInteractiveZone gestureInteractiveZone, GestureEvent gestureEvent) {
+		if (!gestureInteractiveZone.equals(gizButtonArea)) return;
+		int x = gestureEvent.getStartX();
+		int y = gestureEvent.getStartY();
+		// System.out.println("gizButtonPressed: (" + x + "," + y + ")");
+		for (int i = 0; i < 16; i++) {
+			if (x > buttonArea[i * 2] - 1 && x < buttonArea[i * 2] + BUTTON_WIDTH - 1 && y > buttonArea[i * 2 + 1] - 1
+					&& y < buttonArea[i * 2 + 1] + BUTTON_HEIGHT - 1) {
+				// System.out.println("tapped ButtonArea = " + i);
+				int keycode = buttonNumToKeycode(i);
+				switch (gestureEvent.getType()) {
+					case GestureInteractiveZone.GESTURE_RECOGNITION_START:
+						pressed_button = i;
+						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN, BUTTON_WIDTH,
+								BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
+						break;
+					case GestureInteractiveZone.GESTURE_RECOGNITION_END:
+						pressed_button = -1;
+						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN, BUTTON_WIDTH,
+								BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
+						break;
+					case GestureInteractiveZone.GESTURE_TAP:
+						if (keycode > -1) {
+							parent.keyPressed(keys[keycode].charAt(0));
+						} else {
 							if (i == 3) {
 								parent.keyPressed(KEY_CLEAR);
+							} else if (i == 7) {
+								if (keys.equals(KEYS_KANA)) keys = KEYS_ABC;
+								else if (keys.equals(KEYS_ABC)) keys = KEYS_SYMBOL;
+								else if (keys.equals(KEYS_SYMBOL)) keys = KEYS_KANA;
+								parent.repaint(getXPosition(), getYPosition(), getWidth(), getHeight());
+								return;
 							} else if (i == 11) {
 								parent.keyPressed(parent.getKeyCode(Canvas.RIGHT));
+							} else if (i == 12) {
+								parent.keyPressed(KEY_SHIFT);
 							} else if (i == 15) {
 								parent.keyPressed(parent.getKeyCode(Canvas.FIRE));
 							}
 							parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
 									BUTTON_WIDTH, BUTTON_HEIGHT);
-							break;
-					}
+						}
+						break;
+					case GestureInteractiveZone.GESTURE_FLICK:
+						if (keycode > -1) {
+							float direction = gestureEvent.getFlickDirection();
+							if (direction > Math.PI / 4 && direction < Math.PI * 3 / 4) {
+								// flick DOWN
+								parent.keyPressed(keys[keycode].charAt(4));
+							} else if (direction > Math.PI * (-3) / 4 && direction < Math.PI * (-1) / 4) {
+								// flick UP
+								parent.keyPressed(keys[keycode].charAt(2));
+							} else if (direction < Math.PI * (-3) / 4 || direction > Math.PI * 3 / 4) {
+								// flick LEFT
+								parent.keyPressed(keys[keycode].charAt(1));
+							} else if (direction > Math.PI * (-1) / 4 && direction < Math.PI / 4) {
+								// flick RIGHT
+								parent.keyPressed(keys[keycode].charAt(3));
+							}
+						}
+						break;
+//					case GestureInteractiveZone.GESTURE_LONG_PRESS_REPEATED:
+//						if (i == 3) {
+//							parent.keyPressed(KEY_CLEAR);
+//						} else if (i == 11) {
+//							parent.keyPressed(parent.getKeyCode(Canvas.RIGHT));
+//						} else if (i == 15) {
+//							parent.keyPressed(parent.getKeyCode(Canvas.FIRE));
+//						}
+//						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
+//						 BUTTON_WIDTH, BUTTON_HEIGHT);
+//						break;
 				}
 			}
 		}
 	}
 
 	public void launch() {
-		
-		setButtonArea();
-		
         keys = KEYS_KANA;
 		keyboard_visibility = true;
 		GestureRegistrationManager.register(parent, gizButtonArea);

@@ -36,4 +36,5 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 Version history
 ------------------
-* 1.0 Initial release.
+* 1.0.5 Stability & Minor fix.
+* 1.0   Initial release.
