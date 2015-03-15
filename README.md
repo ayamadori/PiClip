@@ -11,6 +11,7 @@ Feature
 * Flick keyboard
 * Word & Phrase prediction
 * Emoji (EXPERIMENTAL)
+
 ####Output
 * Open browser
 * [Share] menu
