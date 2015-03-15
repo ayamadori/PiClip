@@ -1,7 +1,7 @@
 PiClip
 ======
 
-A simple Japanese input helper for Nokia Asha Platform.
+A simple Japanese input helper for Nokia Asha Platform.   
 http://nokia-asha-230-dual-sim.sigma.apps.opera.com/en_us/piclip.html
 
 Feature
