@@ -221,13 +221,13 @@ public class FlickKeyboard {
 				switch (gestureEvent.getType()) {
 					case GestureInteractiveZone.GESTURE_RECOGNITION_START:
 						pressed_button = i;
-						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN, BUTTON_WIDTH,
-								BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
+						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
+						 BUTTON_WIDTH, BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
 						break;
 					case GestureInteractiveZone.GESTURE_RECOGNITION_END:
 						pressed_button = -1;
-						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN, BUTTON_WIDTH,
-								BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
+						parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
+						 BUTTON_WIDTH, BUTTON_WIDTH + MARGIN + BUTTON_HEIGHT);
 						break;
 					case GestureInteractiveZone.GESTURE_TAP:
 						if (keycode > -1) {
@@ -249,7 +249,7 @@ public class FlickKeyboard {
 								parent.keyPressed(parent.getKeyCode(Canvas.FIRE));
 							}
 							parent.repaint(buttonArea[i * 2], buttonArea[i * 2 + 1] - BUTTON_WIDTH - MARGIN,
-									BUTTON_WIDTH, BUTTON_HEIGHT);
+							 BUTTON_WIDTH, BUTTON_HEIGHT);
 						}
 						break;
 					case GestureInteractiveZone.GESTURE_FLICK:

@@ -106,6 +106,7 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		GestureRegistrationManager.register(this, gizTBArea);
 		gizCandsArea = new GestureInteractiveZone(GestureInteractiveZone.GESTURE_TAP
 				| GestureInteractiveZone.GESTURE_FLICK);
+		gizCandsArea.setRectangle(0, iBoader, iScrWidth, iScrHeight - iBoader - keyboard.getHeight());
 
 		// Set the GestureListener object myGestureListener for the Canvas object myCanvas.
 		GestureRegistrationManager.setListener(this, this);
@@ -410,12 +411,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		    else if (ch >= 'a' && ch <= 'z') ch -= 32;
 			// 大文字＞小文字変換
 		    else if (ch >= 'A' && ch <= 'Z') ch += 32;
-//			// 半角＞全角変換
-//			else if (ch >= '\u0021' && ch <= '\u007e') ch += 0xfee0;
-//			else if (ch == ' ') ch = '\u3000';
-//			// 全角＞半角変換
-//			else if (ch >= '\uff01' && ch <= '\uff5e') ch -= 0xfee0;
-//			else if (ch == '\u3000') ch = ' ';
 
 			return ch;
 		}
@@ -427,27 +422,24 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 
 	protected void onChangeCharType() {
 		// 入力文字列のかな<>カナ、大文字<>小文字相互変換
-		if (sbCur.length() > 0) {
-			for (int i = sbCur.length() - 1; i >= 0; i--) {
+		if (iCurIdx > 0) {
+			for (int i = iCurIdx - 1; i >= 0; i--) {
 				sbCur.setCharAt(i, convertChar(sbCur.charAt(i)));
 			}
-			pressFire(sbCur.toString(), -1);
+			pressFire(sbCur.toString().substring(0, iCurIdx), -1);
 			repaint();
 		}
 	}
 
 	protected void onFullMatch() {
 		dictionary.setSearchMode(Dictionary.PREDICT_FULL_MATCH);
-		dictionary.search(cand, prefix, sbCur.toString());
-//		dictionary.search(prefix, sbCur.toString());
+		dictionary.search(cand, prefix, sbCur.toString().substring(0, iCurIdx));
 		repaint();
 	}
 
 	protected void onNormal() {
 		dictionary.setSearchMode(Dictionary.PREDICT_NORMAL);
-		dictionary.search(cand, prefix, sbCur.toString());
-//		dictionary.search(prefix, sbCur.toString());
-		// 予測候補は最初に戻す
+		dictionary.search(cand, prefix, sbCur.toString().substring(0, iCurIdx));
 		repaint();
 	}
 
@@ -470,7 +462,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 			changeToFullMatchCommand();
 		}
 		dictionary.search(cand, prefix, sbCur.toString());
-//		dictionary.search(prefix, sbCur.toString());
 	}
 
 	protected void onBack() {
@@ -507,7 +498,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 //			System.out.println("iPreIdx = " + iPreIdx + ", cpl = " + cpl);
 			if(cpl > 1) sbPre.delete(iPreIdx, iPreIdx + cpl + 1);
 			else sbPre.deleteCharAt(iPreIdx);
-//			sbPre.deleteCharAt(iPreIdx);
 			prefix = null;
 			if(sbPre.length() < 1) iFirstLine = 0;
 		}
@@ -547,11 +537,9 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 	public void pressFire(String temp, int index) {
 		// 文字列を確定
 		sbPre.insert(iPreIdx, temp);
-//		iPreIdx += temp.length();
 		iPreIdx += temp.toCharArray().length;
 		// 学習
 		if(index > -1) dictionary.learning(index);
-//		sbCur.delete(0, sbCur.length());
 		int length = sbCur.length();
 		sbCur.delete(0, iCurIdx);
 		iCurIdx = length - iCurIdx;
@@ -562,7 +550,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 		}
 		prefix = temp;
 		dictionary.search(cand, prefix, sbCur.toString());
-//		dictionary.search(prefix, sbCur.toString());
 	}
 
 	// Touch action
@@ -613,12 +600,10 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 									iCurIdx = 0;
 								}
 								dictionary.search(cand, prefix, sbCur.toString().substring(0, iCurIdx));
-//								dictionary.search(prefix, sbCur.toString().substring(0, iCurIdx));
 							} else {
 								if (iPreIdx < sbPre.length()) {
 									// キャレット右移動
 									iPreIdx += Util.codePointlength(sbPre, iPreIdx);
-//									iPreIdx++;
 								} else {
 									iPreIdx = 0;
 								}
@@ -634,7 +619,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 									iCurIdx = sbCur.length();
 								}
 								dictionary.search(cand, prefix, sbCur.toString().substring(0, iCurIdx));
-//								dictionary.search(prefix, sbCur.toString().substring(0, iCurIdx));
 							} else {
 								if (iPreIdx > 0) {
 									// キャレット左移動									
@@ -665,7 +649,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 									temp = iPreIdx - 2;
 									break;
 								}
-//								char ch = sbPre.charAt(temp);							
 								String codePoint = null;
 								if((cpl = Util.codePointlength(sbPre, temp)) > 1) codePoint = Util.getCodePoint(sbPre, temp); //outer BMP
 								else ch = sbPre.charAt(temp);
@@ -675,11 +658,8 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 									break;
 								}
 								if(codePoint != null) wU -= font.stringWidth(codePoint);
-//								else wU -= font.charWidth(ch);
 								else wU -= FixedFont.charWidth(font, ch);
 								temp -= cpl;
-//								wU -= font.charWidth(ch);
-//								temp--;
 							}
 							iPreIdx = temp + 2;
 
@@ -702,7 +682,6 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 									temp = iPreIdx + 1;
 									break;
 								}
-//								char ch = sbPre.charAt(temp);
 								String codePoint = null;
 								if((cpl = Util.codePointlength(sbPre, temp)) > 1) codePoint = Util.getCodePoint(sbPre, temp); //outer BMP
 								else ch = sbPre.charAt(temp);
@@ -712,16 +691,12 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 									break;
 								}
 								if(codePoint != null) wD -= font.stringWidth(codePoint);
-//								else wD -= font.charWidth(ch);
 								else wD -= FixedFont.charWidth(font, ch);
 								temp += cpl;
-//								wD -= font.charWidth(ch);
-//								temp++;
 							}
 							iPreIdx = temp - 1;
 						}
 					}
-					repaint();
 					break;
 			}
 		} else if (gestureZone.equals(gizCandsArea)) {
@@ -775,4 +750,17 @@ public abstract class PiPanel extends Canvas implements GestureListener {
 	public int getMode() {
 		return mode;
 	}
+	
+//	public void setCandidates(String[] cand) {
+//		this.cand = cand;
+//	}
+	
+//	protected void showNotify() {
+//		dictionary.openDictionary();
+//	}
+//	
+//	protected void hideNotify() {
+//		dictionary.closeDictionary();
+//	}
+
 }

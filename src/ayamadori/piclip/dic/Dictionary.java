@@ -83,7 +83,7 @@ public abstract class Dictionary {
 //			is = dicstream[index];
 //			InputStreamReader reader = new InputStreamReader(is, "UTF-8");
 //			String temp;
-			loadHisory();
+//			loadHisory();
 //			int[] lineLength = (histories.length > 0)? new int[histories.length] : new int[5000]; 
 //			int offset;
 //			while ((temp = readLine(reader)) != null) {
@@ -129,6 +129,7 @@ public abstract class Dictionary {
 				} else {
 					dicData.append(temp);
 				}
+//				dicData.append(temp);
 				temp = null;
 //				System.out.println("sbDic:\n" + sbDic.toString());
 			}
@@ -363,6 +364,7 @@ public abstract class Dictionary {
 	protected int candLength;
 	protected int[] candDicLine;
 	protected StringBuffer dicData;
+//	protected String dicData;
 	protected int searchMode;
 	
 	private int dicIndex;

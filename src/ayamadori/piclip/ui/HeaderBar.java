@@ -32,6 +32,7 @@ public class HeaderBar {// extends CanvasGraphicsItem {
 //		int bottom = OFFSET + font.getHeight();
 //		g.drawString("PiClip", OFFSET, bottom, Graphics.BOTTOM | Graphics.LEFT);
 		g.drawString("PiClip", OFFSET_X, OFFSET_Y, Graphics.TOP | Graphics.LEFT);
+//		g.drawString(Runtime.getRuntime().freeMemory()/1024 + "/" + Runtime.getRuntime().totalMemory()/1024, 240-OFFSET_X, OFFSET_Y, Graphics.TOP | Graphics.RIGHT);
 	}
 	
 	public int getHeight() {

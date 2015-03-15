@@ -71,8 +71,9 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 		cmdBack = new Command("Back", Command.BACK, 9);
 		cmdClearDic = new Command("Clear dictionary (App exit)", Command.ITEM, 3);
 		cmdAbout = new Command("About", Command.ITEM, 5);
-		cmdUpgrade = new Command("Upgrade", Command.ITEM, 4);
-		
+//		cmdUpgrade = new Command("Upgrade", Command.ITEM, 4);
+		cmdUpgrade = new Command("Buy FULL ver.", Command.ITEM, 4);
+
 		addCommand(cmdBack);
 
 		cbAction.setElementListener(this);
@@ -109,8 +110,7 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 		removeCommand(cmdClearDic);
 		addCommand(cmdAbout);
 		
-//		if (!midlet.isUpgraded()) {
-		if (!PiClip.upgraded) {
+		if (!PiClip.UPGRADED) {
 			addCommand(cmdUpgrade);
 		} else {
 			removeCommand(cmdUpgrade);
@@ -127,12 +127,13 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 			g.setFont(Font.getDefaultFont());
 			g.setColor(0x585858);
 			g.drawString("Tap to enter text", getWidth()/2, (getHeight()-header.getHeight())/2, Graphics.HCENTER|Graphics.BASELINE);
-			if (PiClip.upgraded) {
+			if (PiClip.UPGRADED) {
 				g.drawString("To copy text,", getWidth() / 2, header.getHeight() + (getHeight() - header.getHeight()) / 2, Graphics.HCENTER | Graphics.BASELINE);
 				g.drawString("SWIPE to RIGHT or LEFT", getWidth() / 2, header.getHeight() + (getHeight() - header.getHeight()) / 2 + 20, Graphics.HCENTER | Graphics.BASELINE);
 			} else {
 				g.drawString("To enable copy & share,", getWidth() / 2, header.getHeight() + (getHeight() - header.getHeight()) / 2, Graphics.HCENTER | Graphics.BASELINE);
-				g.drawString("SWIPE to UP -> [Upgrade]", getWidth() / 2, header.getHeight() + (getHeight() - header.getHeight()) / 2 + 20, Graphics.HCENTER | Graphics.BASELINE);
+//				g.drawString("SWIPE to UP -> [Upgrade]", getWidth() / 2, header.getHeight() + (getHeight() - header.getHeight()) / 2 + 20, Graphics.HCENTER | Graphics.BASELINE);
+				g.drawString("SWIPE to UP -> [Buy FULL ver.]", getWidth() / 2, header.getHeight() + (getHeight() - header.getHeight()) / 2 + 20, Graphics.HCENTER | Graphics.BASELINE);
 			}
 		}
 		drawText(g, header.getHeight() + OFFSET);
@@ -159,8 +160,7 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 		} else if (c == cmdAbout) {
 			onAbout();
 			cbAction.setVisibility(false);
-		}
-		else if (c == cmdUpgrade) {
+		} else if (c == cmdUpgrade) {
 			midlet.purchaceUpgrade();
 		}
 		// 画面を更新
@@ -172,9 +172,9 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 		addCommand(cmdFullMatch);
 	}
 	
-	public void removeUpgradeCommand() {
-		removeCommand(cmdUpgrade);
-	}
+//	public void removeUpgradeCommand() {
+//		removeCommand(cmdUpgrade);
+//	}
 
 	/**
 	 * Handles CategoryBar events, tells the currently visible CategoryBarView to switch view to whatever item is tapped
@@ -198,7 +198,7 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 				repaint();
 				break;
 			default:
-				if (PiClip.upgraded) {
+				if (PiClip.UPGRADED) {
 					PiClip.enableCopy = false;
 					al.share();
 				} else {
@@ -212,7 +212,7 @@ public class PiPanel_NewAsha extends PiPanel implements CommandListener, Element
 	protected void showNotify() {
 //		super.showNotify();
 		if (getHeight() < 320) cbAction.setVisibility(true);
-		if(PiClip.upgraded)
+		if(PiClip.UPGRADED)
 			PiClip.enableCopy = true;
 	}
 	

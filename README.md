@@ -2,13 +2,16 @@ PiClip
 ======
 
 A simple Japanese input helper for Nokia Asha Platform.
-http://store.ovi.com/content/569913
+http://nokia-asha-230-dual-sim.sigma.apps.opera.com/en_us/piclip.html
 
 Feature
 ----------
+
+####Input
 * Flick keyboard
 * Word & Phrase prediction
 * Emoji (EXPERIMENTAL)
+####Output
 * Open browser
 * [Share] menu
 * Clipboard (EXPERIMENTAL)
@@ -18,7 +21,6 @@ Use of Nokia APIs and plug-ins
 * Share API
 * Nokia Gesture API
 * Nokia UI API
-* Nokia In-App payment plug-in
 
 Use of external library
 --------------------------
@@ -36,5 +38,6 @@ http://www.gnu.org/licenses/gpl-3.0.html
 
 Version history
 ------------------
+* 1.1.0 Apply to the migration from Nokia Store to Opera Mobile Store
 * 1.0.5 Stability & Minor fix.
-* 1.0   Initial release.
+* 1.0.0 Initial release.
