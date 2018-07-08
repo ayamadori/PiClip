@@ -21,14 +21,16 @@ http://ovi.sigma.apps.opera.com/en_us/piclip.html
 - Nokia UI API
 
 ## Use of external library
-- econodic http://www8.atpages.jp/pulpwood/isweb/omake/econodic.html
-- Unicode Emoji Dictionary http://sourceforge.jp/projects/moji/
+- econodic  
+http://www8.atpages.jp/pulpwood/isweb/omake/econodic.html
+- Unicode Emoji Dictionary  
+http://sourceforge.jp/projects/moji/
 
 ## Test
 Tested on Nokia Asha SDK 1.1 & 1.2(beta).
 
 ## License
-GNU GENERAL PUBLIC LICENSE Version 3
+GNU GENERAL PUBLIC LICENSE Version 3  
 http://www.gnu.org/licenses/gpl-3.0.html
 
 ## Version history
