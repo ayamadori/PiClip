@@ -1,8 +1,7 @@
 PiClip
 ======
 
-A simple Japanese input helper for Nokia Asha Platform.   
-http://ovi.sigma.apps.opera.com/en_us/piclip.html
+A simple Japanese input helper for Nokia Asha Platform.
 
 ## Feature
 - Input
@@ -27,7 +26,7 @@ http://www8.atpages.jp/pulpwood/isweb/omake/econodic.html
 http://sourceforge.jp/projects/moji/
 
 ## Test
-Tested on Nokia Asha SDK 1.1 & 1.2(beta).
+Tested on Nokia Asha SDK 1.1 , 1.2(beta) and Asha 230.
 
 ## License
 GNU GENERAL PUBLIC LICENSE Version 3  
