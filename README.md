@@ -1,6 +1,7 @@
 PiClip
 ======
 
+![PiClip_SS1-192x192.png](PiClip_SS1-192x192.png)    
 A simple Japanese input helper for Nokia Asha Platform.
 
 ## Feature
